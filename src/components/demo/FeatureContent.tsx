@@ -83,12 +83,12 @@ const FeatureContent = ({
             <motion.li key={index} variants={itemVariants} className="bullet-check">
               {/* ✅ Tick icon */}
 
-              {bullet.showTick !== false && (
+              
       <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15">
         <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
       </span>
 
-      )}
+     
               <span className="text-white/90">
                 {bullet.label && (
                   <span className="font-semibold text-white ">
