@@ -48,8 +48,10 @@ export interface SubFeature {
   title: string;
   heading: string;
   description: string;
+  subheading?: string;
+  miniheading?: string;
   
-  bullets: { label: string; content: string }[];
+  bullets: { label: string; content: string; type?: 'item' | 'heading'; }[];
    image?: {
     src: string;
     alt?: string;
@@ -67,6 +69,7 @@ export interface VerticalSection {
   title: string;
   subtitle: string;
   icon: LucideIcon;
+   subheading?: string; // ✅ add here
   subFeatures: SubFeature[];
    personas?: Persona[];
    showVideo?: boolean;
@@ -281,13 +284,15 @@ const clientSection: VerticalSection = {
       title: 'Karunya’s Examination Governance Context',
       heading: 'Karunya’s Examination Governance Context',
       description: 'For Karunya, examination integrity is institutional accountability - not just invigilation. ',
+
+       subheading:'As a University with multi-disciplinary programs and accreditation oversight, the examination framework must ensure:',
       image: {
     src: '/brochure/images/karunya.png',
     alt: 'Four Pillars',
     variant: 'framed',
   },
       bullets: [
-         { label: 'As a University with multi-disciplinary programs and accreditation oversight, the examination framework must ensure:', content: '' },
+        
         { label: ' ', content: 'Uniform policy enforcement across Schools & Departments' },
         { label: ' ', content: 'Defensible results in case of appeals, grievances, or RTI scrutiny' },
         { label: ' ', content: 'Audit-ready documentation for NAAC and regulatory reviews' },
@@ -295,14 +300,15 @@ const clientSection: VerticalSection = {
         { label: ' ', content: 'Protection of institutional reputation in high-stakes assessments' },
 
 
-        { label: 'Registrar-Level Accountability Includes:', content: ''},
+        { label: 'Registrar-Level Accountability Includes:', content: '',type: 'heading',},
         { label: '', content: 'Consistency of process' },
         { label: '', content: 'Policy adherence' },
         { label: '', content: 'Documented evidence trail' },
         { label: '', content: 'Academic decision defensibility' },
-         { label: 'Proctorly supports structured, policy-driven exam governance - aligned with institutional responsibility.', content: '' }
+        
        
       ],
+      miniheading:'Proctorly supports structured, policy-driven exam governance - aligned with institutional responsibility.',
     },
   ],
 };
@@ -321,6 +327,7 @@ const frameworkSection: VerticalSection = {
       title: 'Four Pillars',
       heading: 'The Proctorly Framework',
       description: 'Four pillars of institutional exam governance. All pillars are implemented through inspectable, demo-able features',
+    
       image: {
     src: '/brochure/images/tab-4.png',
     alt: 'Four Pillars',
@@ -1421,21 +1428,23 @@ const bookDemo: VerticalSection = {
       title: 'Pilot Collaboration',
       heading: 'Pilot Collaboration',
       description: 'We propose a structured pilot with Karunya University to evaluate Proctorly within your own examination environment.',
+      subheading:'Pilot Scope:',
       image: {
     src: '/brochure/images/tab-19.png',
     alt: 'Pilot Collaboration',
     variant: 'plain',
   },
       bullets: [
-        { label: 'Pilot Scope:', content: ' ' },
+       
         { label: ' ', content: 'One selected exam / cohort' },
          { label: ' ', content: 'Policy configuration aligned to your rules' },
           { label: ' ', content: 'Full operational support from our team' },
            { label: ' ', content: 'Post-exam governance & audit review' },
 
-            { label: 'Conduct a pilot. Review the outcomes. Decide based on evidence. ', content: '' },
+           
        
       ],
+      miniheading:'Conduct a pilot. Review the outcomes. Decide based on evidence.',
       demo: {
     supaDemoUrl: 'https://app.supademo.com/demo/cml6gnosx00110s0iq12owxmt?preview=true&step=1',
     thumbnail: '/brochure/proctorly-three.png',

@@ -75,31 +75,77 @@ const FeatureContent = ({
           >
             {subFeature.description}
           </motion.p>
+          
         )}
 
-        {/* Bullets */}
-        <motion.ul variants={containerVariants} className="space-y-6 mb-10 text-lg">
-          {subFeature.bullets.map((bullet, index) => (
-            <motion.li key={index} variants={itemVariants} className="bullet-check">
-              {/* ✅ Tick icon */}
+         {/* subheading */}
+        {subFeature.subheading && (
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-white/90 mb-8  font-semibold "
+          >
+            {subFeature.subheading}
+          </motion.p>
+          
+        )}
 
-              {bullet.showTick !== false && (
-      <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15">
-        <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
-      </span>
+        
+{/* Bullets */}
+<motion.ul variants={containerVariants} className="space-y-6 mb-10 text-lg">
+  {subFeature.bullets.map((bullet, index) => {
+    const isHeading = bullet.content === '';
 
-      )}
-              <span className="text-white/90">
-                {bullet.label && (
-                  <span className="font-semibold text-white ">
-                    {bullet.label}
-                  </span>
-                )}
-                <div>{bullet.content}</div>
-              </span>
-            </motion.li>
-          ))}
-        </motion.ul>
+    return (
+      <motion.li
+        key={index}
+        variants={itemVariants}
+        className={`flex gap-3 ${isHeading ? 'pl-0' : 'bullet-check'}`}
+      >
+        {/* ✅ Show tick ONLY if not heading */}
+        {!isHeading && (
+          <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15">
+            <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+          </span>
+        )}
+
+        {/* Text */}
+        <span className="text-white/90">
+          {bullet.label && (
+            <div
+              className={`${
+                isHeading
+                  ? 'font-semibold text-white text-lg mt-4'
+                  : 'font-semibold text-white'
+              }`}
+            >
+              {bullet.label}
+            </div>
+          )}
+
+          {!isHeading && <div>{bullet.content}</div>}
+        </span>
+      </motion.li>
+    );
+  })}
+</motion.ul>
+
+
+ {/* miniheading */}
+        {subFeature.miniheading && (
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-white/90 mb-8  font-semibold "
+          >
+            {subFeature.miniheading}
+          </motion.p>
+          
+        )}
+
+
+
+
+
+
       </div>
 
       {/* VIDEO — ALWAYS BELOW TEXT */}
