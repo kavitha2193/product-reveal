@@ -23,12 +23,12 @@
     --primary-foreground: 0 0% 100%;
 
     /* Secondary - Soft slate */
-    --secondary: 220 14% 96%;
+    --secondary: 220 20.14% 88.35%; 
     --secondary-foreground: 224 71% 10%;
 
     /* Muted tones */
     --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted-foreground: #494848;
 
     /* Accent - Teal/Mint */
     --accent: 172 66% 50%;
@@ -123,7 +123,7 @@
   }
 
   .tab-pill-active {
-    @apply bg-gradient-to-r from-primary to-[hsl(var(--proctorly-violet))] text-white shadow-lg shadow-primary/25;
+    @apply bg-indigo-700 text-white shadow-lg shadow-primary/25;
   }
 
   .tab-pill-inactive {
@@ -132,7 +132,7 @@
 
   /* Vertical tab styles */
   .vtab {
-    @apply relative px-4 py-4 rounded-xl transition-all duration-300 ease-out cursor-pointer;
+    @apply relative px-4 py-4 rounded-xl transition-all duration-300 ease-out cursor-pointer  border-b-2  border-solid border-gray-300;
   }
 
   .vtab-active {
@@ -150,8 +150,8 @@
 
   /* Feature card */
   .feature-card {
-    @apply bg-white rounded-2xl p-8 shadow-sm border border-border/50;
-    background: var(--gradient-card);
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-border/50 bg-[linear-gradient(135deg,#233a8b_0%,#1f6aa5_45%,#1aa0c8_100%)];
+   
   }
 
   /* Video container */
@@ -161,16 +161,16 @@
 
   /* Bullet point */
   .bullet-check {
-    @apply flex items-start gap-3 text-muted-foreground;
+    @apply flex items-center gap-3 text-muted-foreground;
   }
 
   .bullet-check-icon {
-    @apply w-5 h-5 rounded-full bg-[hsl(var(--proctorly-teal-light))] text-[hsl(var(--proctorly-teal))] flex items-center justify-center flex-shrink-0 mt-0.5;
+    @apply w-5 h-5 rounded-full bg-white text-blue-600 flex items-center justify-center flex-shrink-0 mt-0.5;
   }
 
   /* CTA Button */
   .cta-button {
-    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white bg-gradient-to-r from-primary to-[hsl(var(--proctorly-violet))] shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300;
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-indigo-800 border-2 border-indigo-800 shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-0.5 transition-all duration-300;
   }
 
   .cta-button-secondary {
@@ -204,7 +204,7 @@
   }
 
   .text-gradient-hero {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-hero);
+    @apply bg-gradient-to-r from-violet-700 via-indigo-700 to-blue-600  bg-clip-text text-transparent;
+    /* background-image: var(--gradient-hero); */
   }
 }

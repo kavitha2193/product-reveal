@@ -1,22 +1,14 @@
 import { motion, Variants } from 'framer-motion';
-import { Check, ExternalLink, ArrowRight } from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
-
-export interface FeatureItem {
-  id: string;
-  title: string;
-  subtitle: string;
-  icon: LucideIcon;
-  heading: string;
-  description: string;
-  bullets: string[];
-  demoLinks?: { label: string; url: string }[];
-  ctaText?: string;
-  ctaSecondary?: string;
-}
+import { Check, ExternalLink, ArrowRight, LucideIcon } from 'lucide-react';
+import { SubFeature } from './demoData';
+import FeatureVideo from './FeatureVideo';
+import FeatureImage from './FeatureImage';
 
 interface FeatureContentProps {
-  feature: FeatureItem;
+  subFeature: SubFeature;
+  sectionIcon: LucideIcon;
+   sectionSubtitle?: string;
+ 
 }
 
 const containerVariants: Variants = {
@@ -39,105 +31,109 @@ const itemVariants: Variants = {
   },
 };
 
-const FeatureContent = ({ feature }: FeatureContentProps) => {
-  const Icon = feature.icon;
-
+const FeatureContent = ({
+  subFeature,
+  sectionIcon: Icon,
+  sectionSubtitle,
+}: FeatureContentProps) => {
   return (
-    <motion.div
-      key={feature.id}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="feature-card"
-    >
-      {/* Icon badge */}
-      <motion.div variants={itemVariants} className="mb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-proctorly-indigo-light text-primary text-sm font-medium">
-          <Icon className="w-4 h-4" />
-          {feature.subtitle}
-        </div>
-      </motion.div>
+   <motion.div
+  key={subFeature.id}
+  variants={containerVariants}
+  initial="hidden"
+  animate="visible"
+  className="feature-card min-h-[85vh]"
+>
+  <div className="grid grid-cols-12 gap-12 items-start h-full">
 
-      {/* Heading */}
-      <motion.h2
-        variants={itemVariants}
-        className="text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight"
-      >
-        {feature.heading}
-      </motion.h2>
+    {/* ================= LEFT — TEXT + VIDEO (6 COLS) ================= */}
+    <div className="col-span-6 flex flex-col justify-between min-w-0">
 
-      {/* Description */}
-      <motion.p
-        variants={itemVariants}
-        className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-2xl"
-      >
-        {feature.description}
-      </motion.p>
-
-      {/* Bullet points */}
-      <motion.ul variants={containerVariants} className="space-y-4 mb-8">
-        {feature.bullets.map((bullet, index) => (
-          <motion.li
-            key={index}
-            variants={itemVariants}
-            className="bullet-check"
-          >
-            <span className="bullet-check-icon">
-              <Check className="w-3 h-3" strokeWidth={3} />
-            </span>
-            <span className="text-foreground/80">{bullet}</span>
-          </motion.li>
-        ))}
-      </motion.ul>
-
-      {/* Demo links */}
-      {feature.demoLinks && feature.demoLinks.length > 0 && (
-        <motion.div variants={containerVariants} className="mb-8">
-          <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-            Explore Demos
-          </h4>
-          <div className="flex flex-wrap gap-3">
-            {feature.demoLinks.map((link, index) => (
-              <motion.a
-                key={index}
-                href={link.url}
-                variants={itemVariants}
-                className="demo-link text-sm"
-                whileHover={{ x: 4 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-              >
-                <ExternalLink className="w-4 h-4" />
-                {link.label}
-              </motion.a>
-            ))}
+      {/* TEXT BLOCK */}
+      <div>
+        {/* Icon badge */}
+        <motion.div variants={itemVariants} className="mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 text-white text-xs font-semibold tracking-widest uppercase">
+            <Icon className="w-4 h-4" />
+            {sectionSubtitle}
           </div>
         </motion.div>
-      )}
 
-      {/* CTA buttons */}
-      <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
-        {feature.ctaText && (
-          <motion.button
-            className="cta-button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+        {/* Heading */}
+        <motion.h2
+          variants={itemVariants}
+          className="text-3xl font-semibold text-white mb-4 leading-tight"
+        >
+          {subFeature.heading}
+        </motion.h2>
+
+        {/* Description */}
+        {subFeature.description && (
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-white/90 mb-8 max-w-xl "
           >
-            {feature.ctaText}
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
+            {subFeature.description}
+          </motion.p>
         )}
-        {feature.ctaSecondary && (
-          <motion.button
-            className="cta-button-secondary"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {feature.ctaSecondary}
-          </motion.button>
-        )}
-      </motion.div>
-    </motion.div>
+
+        {/* Bullets */}
+        <motion.ul variants={containerVariants} className="space-y-6 mb-10 text-lg">
+          {subFeature.bullets.map((bullet, index) => (
+            <motion.li key={index} variants={itemVariants} className="bullet-check">
+              {/* ✅ Tick icon */}
+
+              {bullet.showTick !== false && (
+      <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/15">
+        <Check className="h-3.5 w-3.5 text-white" strokeWidth={3} />
+      </span>
+
+      )}
+              <span className="text-white/90">
+                {bullet.label && (
+                  <span className="font-semibold text-white ">
+                    {bullet.label}
+                  </span>
+                )}
+                <div>{bullet.content}</div>
+              </span>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
+
+      {/* VIDEO — ALWAYS BELOW TEXT */}
+      {subFeature.demo && (
+        <motion.div variants={itemVariants} className="mt-6">
+          <FeatureVideo
+            title={`${subFeature.title} Demo`}
+            supaDemoUrl={subFeature.demo.supaDemoUrl}
+            thumbnail={subFeature.demo.thumbnail}
+            
+          />
+        </motion.div>
+      )}
+    </div>
+
+    {/* ================= RIGHT — IMAGE (6 COLS FULL HEIGHT) ================= */}
+  {subFeature.image && (
+  <motion.div
+    variants={itemVariants}
+    className="col-span-6 flex-1 shrink-0"
+  >
+    <FeatureImage
+      src={subFeature.image.src}
+      alt={subFeature.image.alt}
+      variant={subFeature.image.variant}
+    />
+  </motion.div>
+)}
+  </div>
+</motion.div>
+
+    
   );
 };
+
 
 export default FeatureContent;
